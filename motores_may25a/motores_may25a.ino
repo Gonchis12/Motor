@@ -3,7 +3,7 @@ const int pinIN4 = 8;   // Dirección opuesta
 const int pinENB = 9;   // PWM (control de velocidad)
 
 void setup() {
-  pinMode(pinIN3, OUTPUT);
+  pinMode(pinIN3, OUTPUT);//cabrazooo de josep come pingasa
   pinMode(pinIN4, OUTPUT);
   pinMode(pinENB, OUTPUT);
 }
