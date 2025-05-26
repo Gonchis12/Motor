@@ -1,35 +1,15 @@
-const byte IN3 = 7;      // Dirección
-const byte IN4 = 8;      // Dirección opuesta
-const byte ENB = 9;      // PWM (~)
-
-const byte PASO  = 5;      // Incremento/decremento de PWM
-const int  T_DELAY = 20;   // ms entre pasos (rampa suave)
-const int  T_MAX   = 5000; // **nuevo: 5 s a velocidad máxima
+const int pinIN3 = 7;   // Dirección motor
+const int pinIN4 = 8;   // Dirección opuesta
+const int pinENB = 9;   // PWM (control de velocidad)
 
 void setup() {
-  pinMode(IN3, OUTPUT);
-  pinMode(IN4, OUTPUT);
-  pinMode(ENB, OUTPUT);
-
-  // Sentido antihorario (“izquierda”); invierte HIGH/LOW si quieres el otro
-  digitalWrite(IN3, LOW);
-  digitalWrite(IN4, HIGH);
+  pinMode(pinIN3, OUTPUT);
+  pinMode(pinIN4, OUTPUT);
+  pinMode(pinENB, OUTPUT);
 }
 
 void loop() {
-  //Aceleración 
-  for (int vel = 0; vel <= 255; vel += PASO) {
-    analogWrite(ENB, vel);
-    delay(T_DELAY);
-  }
-
-  delay(T_MAX);  // Mantiene velocidad máxima 5 s
-
-  // Desaceleración 
-  for (int vel = 255; vel >= 0; vel -= PASO) {
-    analogWrite(ENB, vel);
-    delay(T_DELAY);
-  }
-
-  delay(500);    // Medio segundo detenido antes de repetir
-}
+  // Sentido antihorario (izquierda)
+  digitalWrite(pinIN3, LOW);   // IN3 a 0
+  digitalWrite(pinIN4, HIGH);  // IN4 a 1
+  analogWrite(pinENB, 200);    // Velocidad moderada (0–255)
